@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="UIButton" type="Button"]
+margin_right = 80.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 80, 30 )
+text = "Restart"
