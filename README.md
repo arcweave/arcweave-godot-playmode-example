@@ -19,9 +19,10 @@ We have one main scene where the main components are:
 
 ## Scripts
 
+The main implementation and usage of the Plugin is in [scripts/main.gd](scripts/main.gd). In this file you will find some extra code for button handling as well as style customizations. In the examples bellow, you will find the bare code to use with our Plugin.
+
 ### Initialization
 
-The main implementation and usage of the Plugin is in [scripts/main.gd](scripts/main.gd)
 
 Firstly we have to initialize our `Story`
 
@@ -33,7 +34,7 @@ var story: Story = Story.new()
 
 On `_ready` we will draw the contents of the starting element.
 
-```
+```gdscript
 func _ready():
     redraw()
 
@@ -44,7 +45,7 @@ func redraw():
 
 This is enough for drawing the contents of an element. We can also add the options as buttons in our options_container
 
-```
+```gdscript
 func redraw():
     var content: String = story.get_current_content()
     text_container.bbcode_text = content
@@ -62,7 +63,7 @@ In the Arcweave Play Mode implementation, the text of the option can be one of t
 
 We follow the same process in our Godot implementation too.
 
-```
+```gdscript
 func addOptions(options):
     # Firstly we clear the old options if they exist
     for n in options_container.get_children():
@@ -92,7 +93,7 @@ func createButton(text, id):
 
 When clicking on an option, we have to select the option in the `Story` so the new element is selected as the `current_element` and the new options are generated. Then we redraw the new content of the element and their options.
 
-```
+```gdscript
 func _on_option_selection(id):
     story.select_option(id)
     redraw()
@@ -102,7 +103,7 @@ func _on_option_selection(id):
 
 We can also save the state of the game to save our progress:
 
-```
+```gdscript
 const SAVE_PATH : String = "user://arcweave_saved.json"
 
 func save_state()->void:
@@ -122,7 +123,7 @@ func save_state()->void:
 
 And then load it to resume our game:
 
-```
+```gdscript
 func load_state():
     var file = File.new()
     if file.file_exists(SAVE_PATH):
