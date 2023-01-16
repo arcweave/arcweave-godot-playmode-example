@@ -4,6 +4,8 @@ This is an example project of the [Arcweave](https://arcweave.com) Play Mode imp
 
 It uses the [plugin](https://github.com/Arcweave/arcweave-godot-plugin) to integrate an [Arcweave](https://arcweave.com) project, in this case our Example "Castle" Project and create a simple text interactive game.
 
+You can also find the project `.arcw` file in [arcweave_project/the-castle.arcw](arcweave_project/the-castle.arcw) and use this file to import it in your [Arcweave](https://arcweave.com) account using our **Import Project** feature in the [Project List](https://arcweave.com/app/list) page.
+
 This project showcases three main concepts of the Plugin:
 
 * How to use the [content of an Arcweave Element](#drawing-the-element-contents--options)
