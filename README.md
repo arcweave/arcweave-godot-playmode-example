@@ -1,10 +1,12 @@
 # Arcweave Play Mode in Godot
 
-This is an example project of the [Arcweave](https://arcweave.com) Play Mode implemented in Godot using the [Arcweave Godot Plugin](https://github.com/Arcweave/arcweave-godot-plugin).
+This is an example project of the [Arcweave](https://arcweave.com) Play Mode implemented in Godot 3.5 using the [Arcweave Godot Plugin](https://github.com/Arcweave/arcweave-godot-plugin).
 
 It uses the [plugin](https://github.com/Arcweave/arcweave-godot-plugin) to integrate an [Arcweave](https://arcweave.com) project, in this case our Example "Castle" Project and create a simple text interactive game.
 
 You can also find the project `.arcw` file in [arcweave_project/the-castle.arcw](arcweave_project/the-castle.arcw) and use this file to import it in your [Arcweave](https://arcweave.com) account using our **Import Project** feature in the [Project List](https://arcweave.com/app/list) page.
+
+We have also created a couple of [YouTube tutorials](https://www.youtube.com/watch?v=z4n4lu5ARa0) demonstrating this process.
 
 This project showcases three main concepts of the Plugin:
 
