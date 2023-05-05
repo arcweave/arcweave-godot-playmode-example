@@ -6,7 +6,7 @@ var aw_current_element: Element
 var variables: Dictionary
 
 var defaults = {
-	"paintingExamined": false
+	"patience": 20
 }
 
 func _init():
