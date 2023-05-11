@@ -44,7 +44,7 @@ func addOptions(options):
 			lastLabel = self.story.elements[option.targetid].title
 		if lastLabel == null or lastLabel == "":
 			lastLabel = self.story.elements[option.targetid].get_content(self.story.state)
-		createButton(lastLabel, option.targetid)
+		createButton(lastLabel, option)
 	# If options, focus goes to first option button:
 	if options_container.get_child_count() > 0:
 		options_container.get_child(0).grab_focus()
@@ -53,9 +53,9 @@ func addOptions(options):
 	$MarginContainer/VBoxContainer/StateButtons/RestartButton.grab_focus()
 
 
-func createButton(text, id):
+func createButton(text, option):
 	var button = load("res://scenes/OptionButton.tscn").instance()
-	button.connect("pressed", self, "_on_option_selection", [id])
+	button.connect("pressed", self, "_on_option_selection", [option])
 	options_container.add_child(button)
 	text = strip_option_bbcode(text)
 	button.text = text
@@ -68,8 +68,8 @@ func strip_option_bbcode(text: String) -> String:
 	return text
 
 
-func _on_option_selection(id):
-	story.select_option(id)
+func _on_option_selection(option):
+	story.select_option(option)
 	redraw()
 
 
