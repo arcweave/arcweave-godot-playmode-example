@@ -2,8 +2,8 @@ extends Control
 
 const SAVE_PATH : String = "user://arcweave_saved.json"
 
-onready var text_container: RichTextLabel = $MarginContainer/VBoxContainer/Content
-onready var options_container: VBoxContainer = $MarginContainer/VBoxContainer/OptionsContainer
+@onready var text_container: RichTextLabel = $MarginContainer/VBoxContainer/Content
+@onready var options_container: VBoxContainer = $MarginContainer/VBoxContainer/OptionsContainer
 
 var story: Story = Story.new()
 
@@ -25,8 +25,7 @@ func enable_load_button(yes : bool = true) -> void:
 		load_button.focus_mode = FOCUS_NONE
 
 func load_file_exists()-> bool:
-	var file = File.new()
-	if file.file_exists(SAVE_PATH):
+	if FileAccess.file_exists(SAVE_PATH):
 		return true
 	return false
 
@@ -54,8 +53,8 @@ func addOptions(options):
 
 
 func createButton(text, option):
-	var button = load("res://scenes/OptionButton.tscn").instance()
-	button.connect("pressed", self, "_on_option_selection", [option])
+	var button = load("res://scenes/OptionButton.tscn").instantiate()
+	button.connect("pressed", Callable(self, "_on_option_selection").bind(option))
 	options_container.add_child(button)
 	text = strip_option_bbcode(text)
 	button.text = text
@@ -78,19 +77,16 @@ func redraw():
 	content = content.replace("[quote]", "[i][b]")
 	content = content.replace("[/quote]", "[/b][/i]")
 	content = content.replace("\n", "\n\n")
-	text_container.bbcode_text = content
+	text_container.text = content
 	addOptions(story.get_current_options())
 
-
 func load_state():
-	var file = File.new()
-	if file.file_exists(SAVE_PATH):
-		file.open(SAVE_PATH, File.READ)
-		var data = JSON.parse(file.get_as_text()).result
+	if FileAccess.file_exists(SAVE_PATH):
+		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+		var data = JSON.parse_string(file.get_as_text())
 		file.close()
-		story.set_state(data['state'])
-		story.set_current_element(data['element'])
-
+		self.story.set_state(data['state'])
+		self.story.set_current_element(data['element'])
 
 func save_state()->void:
 	var currentState = self.story.get_state()
@@ -101,9 +97,8 @@ func save_state()->void:
 		'element': currentElementId
 	}
 	
-	var file = File.new()
-	file.open(SAVE_PATH, File.WRITE)
-	file.store_string(JSON.print(saveObject, '\t'))
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	file.store_string(JSON.stringify(saveObject, '\t'))
 	file.close()
 	enable_load_button()
 
